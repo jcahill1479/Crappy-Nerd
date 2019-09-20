@@ -39,13 +39,18 @@ function handleShipAnimation() {
 
 function RenderNewObject(context) {
   // Draw a new item here using the canvas 'context' variable
-  context.strokeRect(NEW_OBJECT.x, NEW_OBJECT.y, 60, 60);
+  context.strokeRect(NEW_OBJECT.x+600, 150, 30, 150);
 }
 
 function HandleNewObjectMovement() {
-  NEW_OBJECT.x += 1;
-  NEW_OBJECT.y += 1;
+  NEW_OBJECT.x -= 3;
+  NEW_OBJECT.y -= 0;
 }
+
+function createObstacle(){
+  context.strokeRect()
+}
+
 
 function runGame() {
   var canvas = document.getElementById('mainCanvas');
@@ -59,9 +64,11 @@ function runGame() {
     // 2 - Clear the CANVAS
     context.clearRect(0, 0, 600, 300);
 
+
     // 3 - Draw new items
-    RenderSpaceship(context);
-    RenderNewObject(context);
+    //RenderSpaceship(context);
+   RenderNewObject(context);
+
 
   } else {
     context.font = "30px Arial";
