@@ -48,9 +48,15 @@ function HandleNewObjectMovement() {
 }
 
 function createObstacle(){
-  context.strokeRect()
+  context.strokeRect(NEW_OBJECT.x, 150, 30, 150);
 }
 
+
+function draw(context){
+
+  context.fillRect (550, 0, 30, RANDOM.x);
+  context.fillRect (550, RANDOM.heightOnCanvas, 30, RANDOM.height * 100);
+}
 
 function runGame() {
   var canvas = document.getElementById('mainCanvas');
@@ -64,10 +70,11 @@ function runGame() {
     // 2 - Clear the CANVAS
     context.clearRect(0, 0, 600, 300);
 
-
     // 3 - Draw new items
     //RenderSpaceship(context);
-   RenderNewObject(context);
+    draw(context);
+//   RenderNewObject(context);
+
 
 
   } else {
