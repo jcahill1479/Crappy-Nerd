@@ -22,6 +22,16 @@ var NEW_OBJECT = {
 
 };
 
+var ARRAY ={
+  block : [100, 150, 200, 250, 300]
+}
+
 var ALIVE ={
   isAlive : true
+};
+
+var RANDOM = {
+  x : Math.floor ((Math.random () * 100) + 50),
+  heightOnCanvas : 300 - Math.floor ((Math.random()*100) + 50),
+  height : Math.floor ((Math.random()*100)+50)
 };
