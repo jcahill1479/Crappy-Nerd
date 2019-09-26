@@ -7,13 +7,17 @@ var GAME = {
   level : 1
 };
 
-var SPACE_SHIP = {
-  initialized : false,
-  bullets : [],
-  latest : {
-    x : 0,
-    y : 0
-  }
+var NERD = {
+    x : 80,
+    y : 150,
+    acc : 0.3,
+  vel : 0,
+  jump : -3.5,
+  score: 0
+};
+
+var POOP = {
+  y : 0
 };
 
 var NEW_OBJECT = {
