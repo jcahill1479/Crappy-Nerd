@@ -3,80 +3,97 @@
  *    keyboard control
  *
  */
-function handleShipAnimation() {
-  if (CONTROLS.ship.forward) {
-    var radians = (Math.PI / 180) * SPACE_SHIP.rotation,
-        cos = Math.cos(radians),
-        sin = Math.sin(radians);
-    SPACE_SHIP.x += SPACE_SHIP.speed * sin;
-    SPACE_SHIP.y +=  SPACE_SHIP.speed * cos;
-  }
-  if (CONTROLS.ship.backward) {
-    var radians = (Math.PI / 180) * SPACE_SHIP.rotation,
-        cos = Math.cos(radians),
-        sin = Math.sin(radians);
-    SPACE_SHIP.x -= SPACE_SHIP.speed * sin;
-    SPACE_SHIP.y -=  SPACE_SHIP.speed * cos;
-  }
-  if (CONTROLS.ship.rotateClockwise) {
-    SPACE_SHIP.rotation -= 4;
-  }
-  if (CONTROLS.ship.rotateCounterClockwise) {
-    SPACE_SHIP.rotation += 4;
-  }
+ function renderNerd(context){
+   var canvas = document.getElementById('canvas');
+   handleNerdMovement();
+   var nerdImage= new Image();
+   nerdImage.src = 'avgn.png';
+   context.drawImage(nerdImage, NERD.x,NERD.y, 25, 25);
 
-  // Check if asteroid is leaving the boundary, if so, switch sides
-  if (SPACE_SHIP.x > GAME.canvas.width) {
-    SPACE_SHIP.x = 0;
-  } else if (SPACE_SHIP.x < 0) {
-    SPACE_SHIP.x = 600;
-  } else if (SPACE_SHIP.y > GAME.canvas.height) {
-    SPACE_SHIP.y = 0;
-  } else if (SPACE_SHIP.y < 0) {
-    SPACE_SHIP.y = 300;
+ }
+ function renderPoopWalls(context){
+   var canvas = document.getElementById('canvas');
+   handleWallMovemnt();
+   var bottomPoop1= new Image();
+   var topPoop1 = new Image();
+   var bottomPoop2= new Image();
+   var topPoop2 = new Image();
+   var bottomPoop3= new Image();
+   var topPoop3 = new Image();
+   bottomPoop1.src = 'crappyNerdPoopBottom.png';
+   topPoop1.src = 'crappyNerdPoop.png';
+   bottomPoop2.src = 'crappyNerdPoopBottom.png';
+   topPoop2.src = 'crappyNerdPoop.png';
+   bottomPoop3.src = 'crappyNerdPoopBottom.png';
+   topPoop3.src = 'crappyNerdPoop.png';
+   context.drawImage(topPoop1, WALL.x1,0, 50, WALL.random1);
+   context.drawImage(bottomPoop1, WALL.x1,WALL.height+WALL.random1, 50, (300-WALL.random1)-WALL.height);
+   context.drawImage(topPoop2, WALL.x2,0, 50, WALL.random2);
+   context.drawImage(bottomPoop2, WALL.x2,WALL.height+WALL.random2, 50, (300-WALL.random2)-WALL.height);
+   context.drawImage(topPoop3, WALL.x3,0, 50, WALL.random3);
+    context.drawImage(bottomPoop3, WALL.x3,WALL.height+WALL.random3, 50, (300-WALL.random3)-WALL.height);
+ }
+ function handleWallMovemnt(){
+   WALL.x1+=-2;
+   WALL.x2+=-2;
+   WALL.x3+=-2;
+      if (WALL.x1<-50){
+     WALL.x1=600;
+     WALL.random1 = Math.random() * 251;
+     NERD.score++;
+   }
+   if (WALL.x2<-50){
+     WALL.x2=600;
+     WALL.random2 = Math.random() * 251;
+     NERD.score++;
+   }
+   if (WALL.x3<-50){
+     WALL.x3=600;
+     WALL.random3 = Math.random() * 251;
+     NERD.score++;
+   }
+ }
+ function handleNerdMovement(){
+   NERD.vel+=NERD.acc;
+  if (CONTROLS.nerdC.jump){
+    NERD.vel = NERD.jump;
   }
+  NERD.y += NERD.vel;
+  if (NERD.y > GAME.canvas.height-25){
+    NERD.y = GAME.canvas.height-25;
+  };
+  if (NERD.y < 0){
+    NERD.y = 0;
+  }
+  if (NERD.score%10==0){
+    POOP.y=NERD.y+16;
+ }
+ }
+function drawPoop(){
+  var canvas = document.getElementById('mainCanvas');
+  var context = canvas.getContext('2d');
+  var poop = new Image();
+  poop.src = 'crappyPoopDrop.png';
+  handlePoopMovemnt();
+  context.drawImage(poop, POOP.x,POOP.y, 10,10);
+}
+function handlePoopMovemnt(){
+ POOP.y += 3  ;
 }
 
-function RenderNewObject(context) {
-  // Draw a new item here using the canvas 'context' variable
-  context.strokeRect(NEW_OBJECT.x+600, 150, 30, 150);
-}
-
-function HandleNewObjectMovement() {
-  NEW_OBJECT.x -= 3;
-  NEW_OBJECT.y -= 0;
-}
-
-function createObstacle(){
-  context.strokeRect(NEW_OBJECT.x, 150, 30, 150);
-}
-
-
-function draw(context){
-
-  context.fillRect (550, 0, 30, RANDOM.x);
-  context.fillRect (550, RANDOM.heightOnCanvas, 30, RANDOM.height * 100);
-}
+function initalizeNerd(){
+   NERD.y= GAME.canvas.height/2;
+ }
 
 function runGame() {
   var canvas = document.getElementById('mainCanvas');
   var context = canvas.getContext('2d');
   if (GAME.started) {
-
-    // 1 - Reposition the objects
-    handleShipAnimation();
-    HandleNewObjectMovement();
-
-    // 2 - Clear the CANVAS
     context.clearRect(0, 0, 600, 300);
-
-    // 3 - Draw new items
-    //RenderSpaceship(context);
-    draw(context);
-//   RenderNewObject(context);
-
-
-
+renderNerd(context);
+renderPoopWalls(context);
+drawPoop();
+handlePoopMovemnt();
   } else {
     context.font = "30px Arial";
     context.fillText("Game Over      Level " + GAME.level, 135, 200);

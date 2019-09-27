@@ -7,15 +7,28 @@ var GAME = {
   level : 1
 };
 
-var SPACE_SHIP = {
-  initialized : false,
-  bullets : [],
-  latest : {
-    x : 0,
-    y : 0
-  }
+var NERD = {
+    x : 80,
+    y : 150,
+    acc : 0.3,
+  vel : 0,
+  jump : -3.5,
+  score: 0
 };
 
+var POOP = {
+  x:80,
+  y : 0
+};
+var WALL = {
+  x1: 600,
+  x2: 400,
+  x3: 200,
+  random1: 150,
+  random2: 150,
+  random3: 150,
+  height: 100
+}
 var NEW_OBJECT = {
   x : 0,
   y : 0
