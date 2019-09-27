@@ -26,7 +26,8 @@ var WALL = {
   x3: 150,
   random1: 150,
   random2: 150,
-  random3: 150
+  random3: 150,
+  height: 75
 }
 var NEW_OBJECT = {
   x : 0,
