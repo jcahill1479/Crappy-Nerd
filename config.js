@@ -17,9 +17,17 @@ var NERD = {
 };
 
 var POOP = {
+  x:80,
   y : 0
 };
-
+var WALL = {
+  x1: 550,
+  x2: 350,
+  x3: 150,
+  random1: 150,
+  random2: 150,
+  random3: 150
+}
 var NEW_OBJECT = {
   x : 0,
   y : 0
