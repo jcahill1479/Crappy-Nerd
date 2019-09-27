@@ -20,12 +20,12 @@
    var topPoop2 = new Image();
    var bottomPoop3= new Image();
    var topPoop3 = new Image();
-   bottomPoop1.src = 'crappyNerdPoop.png';
-   topPoop1.src = 'crappyNerdPoopBottom.png';
-   bottomPoop2.src = 'crappyNerdPoop.png';
-   topPoop2.src = 'crappyNerdPoopBottom.png';
-   bottomPoop3.src = 'crappyNerdPoop.png';
-   topPoop3.src = 'crappyNerdPoopBottom.png';
+   bottomPoop1.src = 'crappyNerdPoopBottom.png';
+   topPoop1.src = 'crappyNerdPoop.png';
+   bottomPoop2.src = 'crappyNerdPoopBottom.png';
+   topPoop2.src = 'crappyNerdPoop.png';
+   bottomPoop3.src = 'crappyNerdPoopBottom.png';
+   topPoop3.src = 'crappyNerdPoop.png';
    context.drawImage(topPoop1, WALL.x1,0, 50, WALL.random1);
    context.drawImage(bottomPoop1, WALL.x1,WALL.height+WALL.random1, 50, (300-WALL.random1)-WALL.height);
    context.drawImage(topPoop2, WALL.x2,0, 50, WALL.random2);
@@ -38,17 +38,17 @@
    WALL.x2+=-2;
    WALL.x3+=-2;
       if (WALL.x1<-50){
-     WALL.x1=550;
+     WALL.x1=600;
      WALL.random1 = Math.random() * 251;
      NERD.score++;
    }
    if (WALL.x2<-50){
-     WALL.x2=550;
+     WALL.x2=600;
      WALL.random2 = Math.random() * 251;
      NERD.score++;
    }
    if (WALL.x3<-50){
-     WALL.x3=550;
+     WALL.x3=600;
      WALL.random3 = Math.random() * 251;
      NERD.score++;
    }
@@ -67,7 +67,6 @@
   }
   if (NERD.score%10==0){
     POOP.y=NERD.y+16;
-    drawPoop();
  }
  }
 function drawPoop(){
@@ -79,7 +78,7 @@ function drawPoop(){
   context.drawImage(poop, POOP.x,POOP.y, 10,10);
 }
 function handlePoopMovemnt(){
- POOP.y += 1    ;
+ POOP.y += 3  ;
 }
 
 function initalizeNerd(){

@@ -21,13 +21,13 @@ var POOP = {
   y : 0
 };
 var WALL = {
-  x1: 550,
-  x2: 350,
-  x3: 150,
+  x1: 600,
+  x2: 400,
+  x3: 200,
   random1: 150,
   random2: 150,
   random3: 150,
-  height: 75
+  height: 100
 }
 var NEW_OBJECT = {
   x : 0,
